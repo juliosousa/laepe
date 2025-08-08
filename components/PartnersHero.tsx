@@ -1,8 +1,18 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import Image from 'next/image'
+import { useEffect, useState } from 'react'
 
 export default function PartnersHero() {
+  const [imageLoaded, setImageLoaded] = useState(false)
+  
+  useEffect(() => {
+    // Preload the image to ensure it loads faster
+    const img = new window.Image()
+    img.src = '/assets/bg.jpg'
+    img.onload = () => setImageLoaded(true)
+  }, [])
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -27,8 +37,39 @@ export default function PartnersHero() {
   }
 
   return (
-    <section className="relative min-h-[80vh] flex items-center justify-center bg-gradient-to-br from-primary via-primary-600 to-secondary overflow-hidden">
-      {/* Background Pattern */}
+    <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
+      {/* Background Image with Effects */}
+      <motion.div 
+        className="absolute inset-0"
+        initial={{ scale: 1.1 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 1.5, ease: "easeOut" }}
+      >
+        <Image
+          src="/assets/bg.jpg"
+          alt=""
+          fill
+          className={`object-cover transition-opacity duration-1000 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+          onLoad={() => setImageLoaded(true)}
+          onError={() => {
+            // If image fails to load, still show the background with gradients
+            setImageLoaded(true)
+          }}
+          priority
+        />
+        {/* Fallback gradient background if image doesn't load */}
+        {!imageLoaded && (
+          <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary-600 to-secondary"></div>
+        )}
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/90 via-primary/80 to-secondary/90"></div>
+        {/* Additional Dark Overlay for Better Text Contrast */}
+        <div className="absolute inset-0 bg-black/30"></div>
+        {/* Animated Gradient Effect */}
+        <div className="absolute inset-0 bg-gradient-to-t from-primary/50 via-transparent to-transparent"></div>
+      </motion.div>
+      
+      {/* Pattern Overlay for Texture */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2260%22%20height%3D%2260%22%20viewBox%3D%220%200%2060%2060%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.1%22%3E%3Ccircle%20cx%3D%2230%22%20cy%3D%2230%22%20r%3D%222%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]"></div>
       </div>
