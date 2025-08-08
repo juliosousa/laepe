@@ -105,7 +105,7 @@ export default function ContactForm({ defaultSubject }: ContactFormProps) {
   }
 
   return (
-    <div className="max-w-2xl mx-auto">
+    <div className="max-w-2xl">
       <motion.form
         onSubmit={handleSubmit}
         className="space-y-6"
@@ -124,7 +124,7 @@ export default function ContactForm({ defaultSubject }: ContactFormProps) {
             id="name"
             value={formData.name}
             onChange={(e) => handleInputChange('name', e.target.value)}
-            className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-colors ${
+            className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-colors bg-white text-gray-900 placeholder-gray-500 ${
               errors.name ? 'border-red-500' : 'border-gray-300 focus:border-primary'
             }`}
             placeholder="Seu nome completo"
@@ -147,7 +147,7 @@ export default function ContactForm({ defaultSubject }: ContactFormProps) {
             id="email"
             value={formData.email}
             onChange={(e) => handleInputChange('email', e.target.value)}
-            className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-colors ${
+            className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-colors bg-white text-gray-900 placeholder-gray-500 ${
               errors.email ? 'border-red-500' : 'border-gray-300 focus:border-primary'
             }`}
             placeholder="seu@email.com"
@@ -169,7 +169,7 @@ export default function ContactForm({ defaultSubject }: ContactFormProps) {
             id="subject"
             value={formData.subject}
             onChange={(e) => handleInputChange('subject', e.target.value)}
-            className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-colors ${
+            className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-colors bg-white text-gray-900 ${
               errors.subject ? 'border-red-500' : 'border-gray-300 focus:border-primary'
             }`}
             aria-describedby={errors.subject ? 'subject-error' : undefined}
@@ -198,7 +198,7 @@ export default function ContactForm({ defaultSubject }: ContactFormProps) {
             value={formData.message}
             onChange={(e) => handleInputChange('message', e.target.value)}
             rows={5}
-            className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-colors resize-vertical ${
+            className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-colors resize-vertical bg-white text-gray-900 placeholder-gray-500 ${
               errors.message ? 'border-red-500' : 'border-gray-300 focus:border-primary'
             }`}
             placeholder="Conte-nos mais sobre sua mensagem..."

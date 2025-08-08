@@ -78,7 +78,7 @@ export default function AboutSection() {
         <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-2">
           Quem somos
         </h2>
-        <div className="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto mb-8"></div>
+        <div className="w-24 h-1 bg-gray-300 mx-auto mb-8"></div>
         <p className="text-lg md:text-xl text-foreground/80 max-w-4xl mx-auto leading-relaxed">
           A Liga Acadêmica de Enfermagem Pré‑Hospitalar e Emergência (LAEPE) é um espaço de aprendizado 
           ativo que integra estudo, pesquisa e extensão em Atendimento Pré‑Hospitalar (APH) e Emergência.
@@ -105,13 +105,13 @@ export default function AboutSection() {
           >
             <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
               <div className="flex flex-col items-center text-center">
-                <div className="w-16 h-16 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                  <div className="text-primary">
+                <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <div className="text-gray-600">
                     {stat.icon}
                   </div>
                 </div>
                 <motion.div
-                  className="text-5xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-2"
+                  className="text-5xl font-bold text-gray-800 mb-2"
                   initial={{ scale: 0 }}
                   whileInView={{ scale: 1 }}
                   viewport={{ once: true }}
