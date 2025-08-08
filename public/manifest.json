@@ -1,0 +1,27 @@
+{
+  "name": "LAEPE - UFSC",
+  "short_name": "LAEPE",
+  "description": "Liga Acadêmica de Enfermagem Pré‑Hospitalar e Emergência da UFSC",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#3C3483",
+  "theme_color": "#3C3483",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["education", "health"],
+  "lang": "pt-BR",
+  "dir": "ltr"
+}
