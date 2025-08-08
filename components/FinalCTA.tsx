@@ -131,12 +131,12 @@ export default function FinalCTA() {
         >
           <div className="flex items-center justify-center gap-4 mb-4">
             <div className="w-12 h-12 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center text-white font-bold">
-              "
+              &quot;
             </div>
           </div>
           <p className="text-lg text-white/90 italic text-center mb-4">
-            "Apoiar a LAEPE é investir no futuro da saúde. Cada real aplicado aqui 
-            se multiplica em vidas salvas e profissionais melhores."
+            &quot;Apoiar a LAEPE é investir no futuro da saúde. Cada real aplicado aqui 
+            se multiplica em vidas salvas e profissionais melhores.&quot;
           </p>
           <p className="text-white/70 text-center">
             <strong>Dra. Maria Santos</strong> - Patrocinadora desde 2022

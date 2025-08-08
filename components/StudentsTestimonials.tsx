@@ -114,7 +114,7 @@ export default function StudentsTestimonials() {
                 </svg>
                 
                 <p className="text-lg md:text-xl text-foreground/90 leading-relaxed mb-6">
-                  "{testimonials[currentIndex].testimonial}"
+                  &quot;{testimonials[currentIndex].testimonial}&quot;
                 </p>
                 
                 <div className="inline-flex items-center gap-2 bg-gray-50 rounded-full px-4 py-2 text-sm font-medium text-gray-600">
