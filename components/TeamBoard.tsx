@@ -1,6 +1,8 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
+import Image from 'next/image'
+import { useState } from 'react'
 
 const boardMembers = [
   {
@@ -8,59 +10,41 @@ const boardMembers = [
     role: 'Presidente',
     description: 'Responsável pela liderança geral da liga, coordenação das atividades e representação institucional.',
     responsibilities: ['Coordenação Geral', 'Representação Externa', 'Planejamento Estratégico'],
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-      </svg>
-    )
+    image: '/assets/team/beatriz.jpg'
   },
   {
     name: 'Sandy',
     role: 'Vice-presidente',
     description: 'Auxilia na coordenação das atividades e substitui a presidência quando necessário.',
     responsibilities: ['Apoio à Presidência', 'Coordenação de Projetos', 'Gestão Interna'],
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-      </svg>
-    )
+    image: '/assets/team/sandy.jpg'
   },
   {
     name: 'Úrsula Teles',
     role: 'Diretora de Marketing',
     description: 'Responsável pela comunicação, marketing digital e divulgação das atividades da liga.',
     responsibilities: ['Comunicação Digital', 'Design Gráfico', 'Redes Sociais'],
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
-      </svg>
-    )
+    image: '/assets/team/ursula.jpg'
   },
   {
     name: 'Ana Luiza Schutz',
     role: 'Diretora de Pesquisa',
     description: 'Coordena os projetos de pesquisa, iniciação científica e publicações da liga.',
     responsibilities: ['Projetos de Pesquisa', 'Iniciação Científica', 'Publicações'],
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-      </svg>
-    )
+    image: '/assets/team/ana.jpg'
   },
   {
     name: 'Sophia Helena',
     role: 'Diretora de Extensão',
     description: 'Organiza as atividades de extensão, capacitações e ações junto à comunidade.',
     responsibilities: ['Ações Comunitárias', 'Capacitações', 'Parcerias Externas'],
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-      </svg>
-    )
+    image: '/assets/team/sophia.jpg'
   }
 ]
 
 export default function TeamBoard() {
+  const [selectedMember, setSelectedMember] = useState<typeof boardMembers[0] | null>(null)
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -116,17 +100,29 @@ export default function TeamBoard() {
           >
             <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 h-full">
               <div className="flex flex-col items-center text-center">
-                {/* Photo Placeholder */}
-                <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <svg className="w-12 h-12 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                  </svg>
-                </div>
-
-                {/* Role Icon */}
-                <div className="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mb-4">
-                  <div className="text-gray-600">
-                    {member.icon}
+                {/* Photo */}
+                <div 
+                  className="relative w-32 h-32 mb-6 group-hover:scale-105 transition-transform duration-300 cursor-pointer"
+                  onClick={() => setSelectedMember(member)}
+                >
+                  <div className="w-full h-full bg-gradient-to-br from-blue-500 via-indigo-500 to-purple-500 rounded-full p-1 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <div className="w-full h-full bg-white rounded-full p-1">
+                      <div className="relative w-full h-full rounded-full overflow-hidden">
+                        <Image
+                          src={member.image}
+                          alt={member.name}
+                          fill
+                          className="object-cover"
+                          priority={index < 3}
+                        />
+                        {/* Overlay hover effect */}
+                        <div className="absolute inset-0 bg-black/20 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center rounded-full">
+                          <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
@@ -226,6 +222,79 @@ export default function TeamBoard() {
           </div>
         </div>
       </motion.div>
+
+      {/* Modal para ampliar foto */}
+      <AnimatePresence>
+        {selectedMember && (
+          <motion.div
+            className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedMember(null)}
+          >
+            <motion.div
+              className="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-hidden shadow-2xl"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="relative">
+                {/* Botão fechar */}
+                <button
+                  onClick={() => setSelectedMember(null)}
+                  className="absolute top-4 right-4 z-10 bg-white/90 hover:bg-white rounded-full p-2 shadow-lg transition-colors duration-200"
+                >
+                  <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+
+                {/* Foto ampliada */}
+                <div className="aspect-square bg-gradient-to-br from-gray-50 to-gray-100 relative">
+                  <Image
+                    src={selectedMember.image}
+                    alt={selectedMember.name}
+                    fill
+                    className="object-cover"
+                    priority
+                  />
+                </div>
+
+                {/* Informações do membro */}
+                <div className="p-8">
+                  <div className="text-center mb-6">
+                    <h3 className="text-3xl font-bold text-foreground mb-2">
+                      {selectedMember.name}
+                    </h3>
+                    <div className="inline-block bg-gradient-to-r from-blue-500 to-purple-500 text-white px-6 py-2 rounded-full text-lg font-semibold">
+                      {selectedMember.role}
+                    </div>
+                  </div>
+
+                  <p className="text-lg text-foreground/80 leading-relaxed mb-6 text-center">
+                    {selectedMember.description}
+                  </p>
+
+                  <div>
+                    <h4 className="text-lg font-semibold text-foreground mb-4 text-center">
+                      Principais Responsabilidades:
+                    </h4>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                      {selectedMember.responsibilities.map((responsibility, idx) => (
+                        <div key={idx} className="bg-gray-50 rounded-lg px-4 py-3 text-center">
+                          <span className="text-sm font-medium text-foreground/70">{responsibility}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }

@@ -215,7 +215,9 @@ export default function Home() {
           </p>
         </div>
         
-        <ContactForm />
+        <div className="flex justify-center">
+          <ContactForm />
+        </div>
         
         <div className="mt-12 text-center">
           <p className="text-foreground/80 mb-4">

@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import Image from 'next/image'
 
 const advisors = [
   {
@@ -8,21 +9,21 @@ const advisors = [
     role: 'Orientadora',
     description: 'Professora Doutora responsável pela orientação acadêmica e científica da LAEPE, com vasta experiência em enfermagem de emergência e atendimento pré-hospitalar.',
     specialties: ['Enfermagem de Emergência', 'Atendimento Pré-Hospitalar', 'Pesquisa Científica'],
-    image: '/placeholder-advisor1.jpg'
+    image: '/assets/team/keila.jpg'
   },
   {
     name: 'Enf. Alexandre Anselmo',
     role: 'Co-orientador',
     description: 'Enfermeiro especialista em emergência, atua como co-orientador fornecendo expertise prática e conexão direta com os serviços de saúde.',
     specialties: ['Urgência e Emergência', 'Capacitação Técnica', 'Supervisão Prática'],
-    image: '/placeholder-advisor2.jpg'
+    image: '/assets/team/anselmo.jpg'
   },
   {
     name: 'Enf. Alexandre Caminha',
     role: 'Co-orientador',
     description: 'Enfermeiro com experiência em atendimento pré-hospitalar, contribui com conhecimento prático e supervisão das atividades de extensão.',
     specialties: ['APH', 'Primeiros Socorros', 'Educação em Saúde'],
-    image: '/placeholder-advisor3.jpg'
+    image: '/assets/team/caminha.jpg'
   }
 ]
 
@@ -84,16 +85,15 @@ export default function TeamAdvisors() {
               {/* Photo */}
               <div className="w-full lg:w-1/3 flex-shrink-0">
                 <div className="relative">
-                  <div className="aspect-square bg-gray-100 rounded-2xl overflow-hidden shadow-lg group-hover:shadow-2xl transition-all duration-300">
-                    <div className="w-full h-full bg-gradient-to-br from-gray-200 via-gray-100 to-gray-200 flex items-center justify-center">
-                      <div className="text-center p-8">
-                        <div className="w-24 h-24 bg-gray-300 rounded-full flex items-center justify-center mx-auto mb-4">
-                          <svg className="w-12 h-12 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                          </svg>
-                        </div>
-                        <p className="text-sm text-gray-600 font-medium">Foto será adicionada</p>
-                      </div>
+                  <div className="relative aspect-square rounded-3xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-500 p-1 bg-gradient-to-br from-blue-500 via-indigo-500 to-purple-500 hover:from-emerald-500 hover:via-teal-500 hover:to-blue-500 hover:scale-105">
+                    <div className="w-full h-full bg-white rounded-3xl p-2">
+                      <Image
+                        src={advisor.image}
+                        alt={advisor.name}
+                        fill
+                        className="object-cover rounded-2xl"
+                        priority={index === 0}
+                      />
                     </div>
                   </div>
                   
