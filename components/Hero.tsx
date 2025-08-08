@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
 export default function Hero() {
@@ -9,7 +10,7 @@ export default function Hero() {
   
   useEffect(() => {
     // Preload the image to ensure it loads faster
-    const img = new Image()
+    const img = new window.Image()
     img.src = '/assets/bg.jpg'
     img.onload = () => setImageLoaded(true)
   }, [])
@@ -51,15 +52,17 @@ export default function Hero() {
         animate={{ scale: 1 }}
         transition={{ duration: 1.5, ease: "easeOut" }}
       >
-        <img 
-          src="/assets/bg.jpg" 
-          alt="" 
-          className={`w-full h-full object-cover transition-opacity duration-1000 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+        <Image
+          src="/assets/bg.jpg"
+          alt=""
+          fill
+          className={`object-cover transition-opacity duration-1000 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
           onLoad={() => setImageLoaded(true)}
           onError={() => {
             // If image fails to load, still show the background with gradients
             setImageLoaded(true)
           }}
+          priority
         />
         {/* Fallback gradient background if image doesn't load */}
         {!imageLoaded && (

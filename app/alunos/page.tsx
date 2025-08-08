@@ -103,7 +103,7 @@ export default function AlunosPage() {
             Inscreva-se
           </h2>
           <p className="text-foreground/80 max-w-2xl mx-auto">
-            Preencha o formulário abaixo e selecione o assunto "Alunos". Entraremos em contato com você com as próximas etapas.
+            Preencha o formulário abaixo e selecione o assunto &quot;Alunos&quot;. Entraremos em contato com você com as próximas etapas.
           </p>
         </div>
         <ContactForm defaultSubject="alunos" />
