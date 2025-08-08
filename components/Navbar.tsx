@@ -18,10 +18,9 @@ export default function Navbar() {
   }, [])
 
   const navItems = [
-    { name: 'Alunos', href: '/alunos' },
+    { name: 'Equipe', href: '/equipe' },
     { name: 'Parceiros', href: '/parceiros' },
     { name: 'Patrocinadores', href: '/patrocinadores' },
-    { name: 'Contato', href: '#contato' },
   ]
 
   return (
@@ -75,7 +74,7 @@ export default function Navbar() {
               className="btn-primary"
               aria-label="Participar da LAEPE"
             >
-              Participar
+              Quero Participar
             </Link>
           </div>
 
@@ -131,7 +130,7 @@ export default function Navbar() {
                   className="btn-primary block text-center"
                   onClick={() => setIsOpen(false)}
                 >
-                  Participar
+                  Quero Participar
                 </Link>
               </div>
             </motion.div>
