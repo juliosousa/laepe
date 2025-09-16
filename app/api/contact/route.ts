@@ -44,28 +44,62 @@ export async function POST(request: NextRequest) {
 
     // Validação dos dados
     const validation = validateContactData({ name, email, subject, message })
-    
+
     if (!validation.isValid) {
       return NextResponse.json(
-        { 
-          success: false, 
-          errors: validation.errors 
+        {
+          success: false,
+          errors: validation.errors
         },
         { status: 400 }
       )
     }
 
-    // Aqui você pode adicionar a lógica para enviar o e-mail
-    // Por exemplo, usando um serviço como SendGrid, Nodemailer, etc.
-    
-    // Simulação de envio de e-mail (mock)
-    console.log('Nova mensagem de contato:', {
+    // Preparar dados para envio
+    const contactData = {
       name: name.trim(),
       email: email.trim(),
       subject: subject.trim(),
       message: message.trim(),
       timestamp: new Date().toISOString()
-    })
+    }
+
+    // Log local
+    console.log('Nova mensagem de contato:', contactData)
+
+    // Enviar para o webhook com autenticação básica
+    try {
+      const webhookUrl = 'https://auto.artificia.com.br/webhook/6e3bf6fb-daba-4c40-ac5f-258056a8fb20'
+      const username = process.env.WEBHOOK_USERNAME
+      const password = process.env.WEBHOOK_PASSWORD
+
+      if (!username || !password) {
+        console.error('Credenciais do webhook não configuradas nas variáveis de ambiente')
+        // Continua mesmo sem as credenciais - não bloqueia o envio do formulário
+      }
+
+      // Criar o header de autenticação básica
+      const authHeader = 'Basic ' + Buffer.from(`${username}:${password}`).toString('base64')
+
+      const webhookResponse = await fetch(webhookUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': authHeader
+        },
+        body: JSON.stringify(contactData)
+      })
+
+      if (!webhookResponse.ok) {
+        console.error('Erro ao enviar para o webhook:', webhookResponse.status, webhookResponse.statusText)
+        // Continua mesmo se o webhook falhar - não bloqueia o envio do formulário
+      } else {
+        console.log('Mensagem enviada para o webhook com sucesso')
+      }
+    } catch (webhookError) {
+      console.error('Erro ao conectar com o webhook:', webhookError)
+      // Continua mesmo se o webhook falhar - não bloqueia o envio do formulário
+    }
 
     // Em produção, você implementaria o envio real do e-mail aqui
     // await sendEmail({
@@ -80,9 +114,9 @@ export async function POST(request: NextRequest) {
     // })
 
     return NextResponse.json(
-      { 
-        success: true, 
-        message: 'Mensagem enviada com sucesso!' 
+      {
+        success: true,
+        message: 'Mensagem enviada com sucesso!'
       },
       { status: 200 }
     )
