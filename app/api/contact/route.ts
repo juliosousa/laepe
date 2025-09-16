@@ -74,9 +74,14 @@ export async function POST(request: NextRequest) {
       const password = process.env.WEBHOOK_PASSWORD
 
       if (!username || !password) {
-        console.error('Credenciais do webhook não configuradas nas variáveis de ambiente')
+        console.error('⚠️ WEBHOOK: Credenciais não configuradas nas variáveis de ambiente')
+        console.error('Configure WEBHOOK_USERNAME e WEBHOOK_PASSWORD no arquivo .env')
         // Continua mesmo sem as credenciais - não bloqueia o envio do formulário
       }
+
+      console.log('📤 WEBHOOK: Iniciando envio para webhook externo...')
+      console.log(`   URL: ${webhookUrl}`)
+      console.log(`   Dados: ${JSON.stringify(contactData, null, 2)}`)
 
       // Criar o header de autenticação básica
       const authHeader = 'Basic ' + Buffer.from(`${username}:${password}`).toString('base64')
@@ -91,13 +96,38 @@ export async function POST(request: NextRequest) {
       })
 
       if (!webhookResponse.ok) {
-        console.error('Erro ao enviar para o webhook:', webhookResponse.status, webhookResponse.statusText)
+        console.error('❌ WEBHOOK: Falha no envio')
+        console.error(`   Status: ${webhookResponse.status}`)
+        console.error(`   StatusText: ${webhookResponse.statusText}`)
+
+        // Tentar ler o corpo da resposta de erro
+        try {
+          const errorBody = await webhookResponse.text()
+          if (errorBody) {
+            console.error(`   Resposta: ${errorBody}`)
+          }
+        } catch (e) {
+          // Ignora se não conseguir ler o corpo
+        }
         // Continua mesmo se o webhook falhar - não bloqueia o envio do formulário
       } else {
-        console.log('Mensagem enviada para o webhook com sucesso')
+        console.log('✅ WEBHOOK: Enviado com sucesso!')
+        console.log(`   Status: ${webhookResponse.status}`)
+
+        // Tentar ler o corpo da resposta de sucesso
+        try {
+          const responseBody = await webhookResponse.text()
+          if (responseBody) {
+            console.log(`   Resposta: ${responseBody}`)
+          }
+        } catch (e) {
+          // Ignora se não conseguir ler o corpo
+        }
       }
     } catch (webhookError) {
-      console.error('Erro ao conectar com o webhook:', webhookError)
+      console.error('❌ WEBHOOK: Erro ao conectar com o webhook')
+      console.error(`   Erro: ${webhookError}`)
+      console.error(`   Tipo: ${webhookError instanceof Error ? webhookError.message : 'Erro desconhecido'}`)
       // Continua mesmo se o webhook falhar - não bloqueia o envio do formulário
     }
 
