@@ -105,18 +105,21 @@ export default function ContactForm({ defaultSubject }: ContactFormProps) {
   }
 
   return (
-    <div className="max-w-4xl w-full">
+    <div className="w-full">
       <motion.form
         onSubmit={handleSubmit}
-        className="space-y-8"
+        className="space-y-5"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
         {/* Name Field */}
-        <div>
-          <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
+        <div className="group">
+          <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
+            <svg className="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
             Nome completo *
           </label>
           <input
@@ -124,22 +127,33 @@ export default function ContactForm({ defaultSubject }: ContactFormProps) {
             id="name"
             value={formData.name}
             onChange={(e) => handleInputChange('name', e.target.value)}
-            className={`w-full px-6 py-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-colors bg-white text-gray-900 placeholder-gray-500 text-lg ${
-              errors.name ? 'border-red-500' : 'border-gray-300 focus:border-primary'
+            className={`w-full px-5 py-3.5 border-2 rounded-xl focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all duration-200 bg-gray-50 hover:bg-white text-gray-900 placeholder-gray-400 text-base font-medium ${
+              errors.name ? 'border-red-400 bg-red-50' : 'border-gray-200 focus:border-primary'
             }`}
-            placeholder="Seu nome completo"
+            placeholder="Digite seu nome completo"
             aria-describedby={errors.name ? 'name-error' : undefined}
           />
           {errors.name && (
-            <p id="name-error" className="mt-1 text-sm text-red-600">
+            <motion.p
+              id="name-error"
+              className="mt-2 text-sm text-red-600 flex items-center gap-1"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
               {errors.name}
-            </p>
+            </motion.p>
           )}
         </div>
 
         {/* Email Field */}
-        <div>
-          <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
+        <div className="group">
+          <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
+            <svg className="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
             E-mail *
           </label>
           <input
@@ -147,30 +161,41 @@ export default function ContactForm({ defaultSubject }: ContactFormProps) {
             id="email"
             value={formData.email}
             onChange={(e) => handleInputChange('email', e.target.value)}
-            className={`w-full px-6 py-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-colors bg-white text-gray-900 placeholder-gray-500 text-lg ${
-              errors.email ? 'border-red-500' : 'border-gray-300 focus:border-primary'
+            className={`w-full px-5 py-3.5 border-2 rounded-xl focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all duration-200 bg-gray-50 hover:bg-white text-gray-900 placeholder-gray-400 text-base font-medium ${
+              errors.email ? 'border-red-400 bg-red-50' : 'border-gray-200 focus:border-primary'
             }`}
             placeholder="seu@email.com"
             aria-describedby={errors.email ? 'email-error' : undefined}
           />
           {errors.email && (
-            <p id="email-error" className="mt-1 text-sm text-red-600">
+            <motion.p
+              id="email-error"
+              className="mt-2 text-sm text-red-600 flex items-center gap-1"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
               {errors.email}
-            </p>
+            </motion.p>
           )}
         </div>
 
         {/* Subject Field */}
-        <div>
-          <label htmlFor="subject" className="block text-sm font-medium text-foreground mb-2">
+        <div className="group">
+          <label htmlFor="subject" className="block text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
+            <svg className="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+            </svg>
             Assunto *
           </label>
           <select
             id="subject"
             value={formData.subject}
             onChange={(e) => handleInputChange('subject', e.target.value)}
-            className={`w-full px-6 py-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-colors bg-white text-gray-900 text-lg ${
-              errors.subject ? 'border-red-500' : 'border-gray-300 focus:border-primary'
+            className={`w-full px-5 py-3.5 border-2 rounded-xl focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all duration-200 bg-gray-50 hover:bg-white text-gray-900 text-base font-medium appearance-none cursor-pointer ${
+              errors.subject ? 'border-red-400 bg-red-50' : 'border-gray-200 focus:border-primary'
             }`}
             aria-describedby={errors.subject ? 'subject-error' : undefined}
           >
@@ -182,53 +207,92 @@ export default function ContactForm({ defaultSubject }: ContactFormProps) {
             ))}
           </select>
           {errors.subject && (
-            <p id="subject-error" className="mt-1 text-sm text-red-600">
+            <motion.p
+              id="subject-error"
+              className="mt-2 text-sm text-red-600 flex items-center gap-1"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
               {errors.subject}
-            </p>
+            </motion.p>
           )}
         </div>
 
         {/* Message Field */}
-        <div>
-          <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
+        <div className="group">
+          <label htmlFor="message" className="block text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
+            <svg className="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+            </svg>
             Mensagem *
           </label>
           <textarea
             id="message"
             value={formData.message}
             onChange={(e) => handleInputChange('message', e.target.value)}
-            rows={5}
-            className={`w-full px-6 py-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-colors resize-vertical bg-white text-gray-900 placeholder-gray-500 text-lg ${
-              errors.message ? 'border-red-500' : 'border-gray-300 focus:border-primary'
+            rows={4}
+            className={`w-full px-5 py-3.5 border-2 rounded-xl focus:outline-none focus:ring-4 focus:ring-primary/10 transition-all duration-200 resize-none bg-gray-50 hover:bg-white text-gray-900 placeholder-gray-400 text-base font-medium ${
+              errors.message ? 'border-red-400 bg-red-50' : 'border-gray-200 focus:border-primary'
             }`}
-            placeholder="Conte-nos mais sobre sua mensagem..."
+            placeholder="Descreva como podemos ajudar..."
             aria-describedby={errors.message ? 'message-error' : undefined}
           />
           {errors.message && (
-            <p id="message-error" className="mt-1 text-sm text-red-600">
+            <motion.p
+              id="message-error"
+              className="mt-2 text-sm text-red-600 flex items-center gap-1"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
               {errors.message}
-            </p>
+            </motion.p>
           )}
         </div>
 
         {/* Submit Button */}
-        <button
+        <motion.button
           type="submit"
           disabled={isSubmitting}
-          className="w-full btn-primary text-xl py-5 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full bg-gradient-to-r from-primary to-secondary text-white font-bold text-lg py-4 px-6 rounded-xl shadow-lg hover:shadow-xl transform transition-all duration-200 hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 flex items-center justify-center gap-3"
           aria-label="Enviar mensagem"
+          whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
+          whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
         >
-          {isSubmitting ? 'Enviando...' : 'Enviar mensagem'}
-        </button>
+          {isSubmitting ? (
+            <>
+              <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              Enviando...
+            </>
+          ) : (
+            <>
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+              </svg>
+              Enviar mensagem
+            </>
+          )}
+        </motion.button>
 
         {/* Status Messages */}
         {submitStatus === 'success' && (
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="p-4 bg-green-50 border border-green-200 rounded-lg"
+            className="p-4 bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-300 rounded-xl shadow-sm"
           >
-            <p className="text-green-800 font-medium">
+            <p className="text-green-800 font-semibold flex items-center gap-2">
+              <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
               Mensagem enviada com sucesso! Entraremos em contato em breve.
             </p>
           </motion.div>
@@ -238,9 +302,12 @@ export default function ContactForm({ defaultSubject }: ContactFormProps) {
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="p-4 bg-red-50 border border-red-200 rounded-lg"
+            className="p-4 bg-gradient-to-r from-red-50 to-rose-50 border-2 border-red-300 rounded-xl shadow-sm"
           >
-            <p className="text-red-800 font-medium">
+            <p className="text-red-800 font-semibold flex items-center gap-2">
+              <svg className="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
               Erro ao enviar mensagem. Tente novamente ou entre em contato diretamente pelo e-mail.
             </p>
           </motion.div>
