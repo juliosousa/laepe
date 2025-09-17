@@ -19,6 +19,7 @@ export default function Navbar() {
 
   const navItems = [
     { name: 'Equipe', href: '/equipe' },
+    { name: 'Eventos', href: '/eventos' },
     { name: 'Parceiros', href: '/parceiros' },
     { name: 'Patrocinadores', href: '/patrocinadores' },
   ]
